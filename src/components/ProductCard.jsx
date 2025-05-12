@@ -45,21 +45,11 @@
 const ProductCard = ({ product }) => {
     if (!product || typeof product !== 'object') return null;
 
-    // Faz parsing seguro do campo images
-    let images = [];
-    try {
-        if (typeof product.images === 'string') {
-            images = JSON.parse(product.images);
-        } else if (Array.isArray(product.images)) {
-            images = product.images;
-        }
-    } catch (error) {
-        console.error('Erro ao fazer parse das imagens:', error);
-    }
-
-    const imageUrl = images.length > 0
-        ? `http://localhost:5000/uploads/${images[0]}`
-        : '/images/default.jpg';
+    // Extrair a primeira imagem da string separada por vírgulas
+    const imageList = product.image ? product.image.split(',') : [];
+    const imageUrl = imageList.length > 0
+        ? `http://localhost:5000/uploads/${imageList[0]}`
+        : '/images/default.jpg'; 
 
     return (
         <div className="bg-white rounded-xl shadow p-4 text-center">
@@ -68,23 +58,16 @@ const ProductCard = ({ product }) => {
                 alt={product.name || 'Produto'}
                 className="w-full h-40 object-contain rounded-md bg-white"
             />
-            {images.length > 1 && (
-                <div className="mt-2 flex justify-center space-x-2">
-                    {images.slice(1).map((image, index) => (
-                        <img
-                            key={index}
-                            src={`http://localhost:5000/uploads/${image}`}
-                            alt={`Miniatura ${index + 1}`}
-                            className="w-16 h-16 object-cover rounded-md border"
-                        />
-                    ))}
-                </div>
-            )}
+            
+             <p className="text-black font-bold no-underline ">
+                {product.name ? `${product.name}` : 'Nome não disponível'}
+            </p>
             <p className="text-black font-bold no-underline ">
                 {product.price ? `${product.price}€` : 'Preço não disponível'}
             </p>
         </div>
     );
 };
+
 
 export default ProductCard;
