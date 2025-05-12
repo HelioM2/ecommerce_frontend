@@ -48,9 +48,8 @@ const ProductCard = ({ product }) => {
     // Extrair a primeira imagem da string separada por vírgulas
     const imageList = product.image ? product.image.split(',') : [];
     const imageUrl = imageList.length > 0
-        ? `http://localhost:5000/uploads/${imageList[0]}`
+        ? `https://ecommercebackend-backend-afropoderosa.up.railway.app/uploads/${imageList[0]}`
         : '/images/default.jpg'; 
-
     return (
         <div className="bg-white rounded-xl shadow p-4 text-center">
             <img
