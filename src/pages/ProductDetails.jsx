@@ -10,21 +10,21 @@ const ProductDetails = () => {
   const [imagemSelecionada, setImagemSelecionada] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/product/coresDetails/${id}`)
+    axios.get(`https://ecommercebackend-backend-afropoderosa.up.railway.app/api/product/coresDetails/${id}`)
       .then(res => setCores(res.data))
       .catch(() => setCores([]));
 
-    axios.get(`http://localhost:5000/api/product/productSize/${id}`)
+    axios.get(`https://ecommercebackend-backend-afropoderosa.up.railway.app/api/product/productSize/${id}`)
       .then(res => setSize(res.data))
       .catch(() => setSize([]));
 
-    axios.get(`http://localhost:5000/api/product/${id}`).then((res) => {
+    axios.get(`https://ecommercebackend-backend-afropoderosa.up.railway.app/api/product/${id}`).then((res) => {
       let produtoData = res.data;
       //console.log('IMAGEM: ', res.data.image);\
 
       // Corrigir o array de imagens
       if (produtoData.image && typeof produtoData.image === 'string') {
-        const imagensArray = produtoData.image.split(',').map(img => `http://localhost:5000/uploads/${img.trim()}`);
+        const imagensArray = produtoData.image.split(',').map(img => `https://ecommercebackend-backend-afropoderosa.up.railway.app/uploads/${img.trim()}`);
         produtoData.images = imagensArray;
       }
 
@@ -32,7 +32,7 @@ const ProductDetails = () => {
       // Verifica se a imagem existe; caso não, usa uma imagem padrão
       const imageUrl = produtoData.images && produtoData.images.length > 0
         ? produtoData.images[0]
-        : (produtoData.image ? `http://localhost:5000/uploads/${produtoData.image}` : '/images/default.webp');
+        : (produtoData.image ? `https://ecommercebackend-backend-afropoderosa.up.railway.app/uploads/${produtoData.image}` : '/images/default.webp');
 
       setImagemSelecionada(imageUrl);
     });
