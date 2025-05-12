@@ -109,7 +109,7 @@ const ProductDetails = () => {
             >
               <option value="">Selecione uma cor</option>
               {cores.length > 0 ? (
-                cores.map((item) => (
+                cores?.map((item) => (
                   <option key={item.id} value={item.id}>{item.name}</option>
                 ))
               ) : (
@@ -122,7 +122,7 @@ const ProductDetails = () => {
           <div>
             <h4 className="font-semibold mt-4">Tamanho:</h4>
             <div className="flex gap-2 flex-wrap">
-              {size.map((size) => (
+              {size?.map((size) => (
                 <button key={size.id} className="border rounded px-3 py-1">{size.name}</button>
               ))}
             </div>
