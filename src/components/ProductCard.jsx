@@ -58,10 +58,10 @@ const ProductCard = ({ product }) => {
                 className="w-full h-40 object-contain rounded-md bg-white"
             />
             
-             <p className="text-black font-bold no-underline ">
+             <p className="text-black font-bold no-underline-custom">
                 {product.name ? `${product.name}` : 'Nome não disponível'}
             </p>
-            <p className="text-black font-bold no-underline ">
+            <p className="text-black font-bold no-underline-custom">
                 {product.price ? `${product.price}€` : 'Preço não disponível'}
             </p>
         </div>

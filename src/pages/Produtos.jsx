@@ -37,7 +37,7 @@ const Produtos = () => {
       <main className="flex-1 p-8 bg-gray-100">
         {/* <h1 className="text-3xl font-bold mb-6 text-center"></h1> */}
         <ErrorBoundary>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 ">
         {produtos.map((produto) => (
               <ProductCard key={produto.id} product={produto} />
             ))}

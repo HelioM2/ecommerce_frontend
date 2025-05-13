@@ -34,23 +34,26 @@ const Home = () => {
     const imagemAtual = imagensBanner[indiceAtual] || '';
 
     return (
-        <div className="space-y-10 px-4 md:px-12 py-8 max-w-[80%] mx-auto ">
-
-            {/* Banner principal */}
-            <section className="space-y-10 grid grid-cols-1 md:grid-cols-2 gap-4 bg-gradient-to-r from-purple-400 to-green-200 rounded-b-2xl p-6 md:p-6 max-w-[180%] mx-auto mt-0">
-                <div className="flex flex-col justify-center items-start pace-y-2">
-                    <h1 className="text-2xl md:text-3xl font-bold text-white">T-shirt Afropoderosa</h1>
-                    <p className="text-sm md:text-base text-white">A tua loja favorita</p>
-                    <button className="bg-gray-800 text-white px-4 py-2 rounded-lg text-sm font-bold">Contacte-nos</button>
+        <>
+        {/* Banner principal */}
+            <section className="w-full min-h-[300px] md:min-h-[400px] flex flex-col md:flex-row items-center justify-center bg-gradient-to-r from-purple-400 to-green-200 px-6 py-8 md:py-12">
+                <div className="flex-1 flex flex-col items-center justify-center text-center mb-6 md:mb-0">
+                    <h1 className="text-2xl md:text-4xl font-bold text-white mb-2 mt-12 md:mt-0">T-shirt Afropoderosa</h1>
+                    <p className="text-sm md:text-lg text-white mb-4">A tua loja favorita</p>
+                    <button className="bg-gray-800 text-white px-6 py-2 rounded-lg text-sm md:text-base font-bold">Contacte-nos</button>
                 </div>
+                <div className="flex-1 flex justify-center items-center">
                 <img
                     //src={`http://localhost:5000/uploads/${imagemAtual}`}
                     src={`https://ecommercebackend-backend-afropoderosa.up.railway.app/uploads/${imagemAtual}`}
                     alt="Banner produto"
-                    className="rounded-xl w-full h-auto max-h-64 object-contain bg-transparent transition-all duration-700 ease-in-out"
+                    className="rounded-xl w-full h-auto max-h-64 md:max-h-80 object-contain transition-all duration-700 ease-in-out mt-4"
                 />
-
+                </div>
             </section>
+        <div className="space-y-10 px-4 md:px-12 py-8 max-w-screen-xl mx-auto">
+
+            
 
             {/* Categorias em destaque 
             <section className="grid grid-cols-2 xl:grid-cols-3 gap-3">
@@ -71,16 +74,9 @@ const Home = () => {
             {/* Produtos em destaque */}
             <section><br />
                 <h2 className="text-2xl font-bold mb-6 text-center">T-shirt Destaques</h2>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 ">
-                    {/* {products.map((product, index) => (
-                        product ? <Link key={`${product.id}-${index}`} to={`/produto/${product.id}`}>
-                            <ProductCard product={product} />
-                        </Link> : null
-                    ))} */}
-
-                    {products.map((product, index) => {
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 ">
+                    {products?.map((product, index) => {
                         if (!product || typeof product !== 'object') return null;
-
                         // Extrair primeira imagem de destaque
                         const imagens = product.imagens?.split(',') || [];
                         const imagemDestaque = imagens[0] || '';
@@ -92,10 +88,10 @@ const Home = () => {
                             </Link>
                         );
                     })}
-
                 </div>
             </section>
         </div>
+        </>
     );
 };
 
