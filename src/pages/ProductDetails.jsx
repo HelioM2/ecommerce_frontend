@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react"; // Importando o Swiper diretamente
 import 'swiper/css'; // Importação do CSS do Swiper
+import { useCart } from "../components/CartContext";
 
 // Importando os módulos necessários diretamente
 import { Navigation, Pagination, A11y } from "swiper";
@@ -13,6 +14,8 @@ const ProductDetails = () => {
   const { id } = useParams();
   const [produto, setProduto] = useState(null);
   const [imagemSelecionada, setImagemSelecionada] = useState(null);
+  const [tamanhoSelecionado, setTamanhoSelecionado] = useState("");
+
 
   useEffect(() => {
     axios.get(`https://ecommercebackend-backend-afropoderosa.up.railway.app/api/product/coresDetails/${id}`)
@@ -37,6 +40,47 @@ const ProductDetails = () => {
     });
   }, [id]);
 
+  //adicionar produto ao carrinho
+  const { addToCart } = useCart();
+
+  const handleAddToCart = () => {
+    const quantidade = document.querySelector("input[type='number']").value;
+    const corSelect = document.querySelector("select[name='categoria']");
+    const cor = corSelect?.value;
+    const corNome = corSelect?.options[corSelect.selectedIndex]?.text;
+
+    // Verificações
+    if (!cor || cor === "") {
+      alert("Por favor, selecione uma cor.");
+      return;
+    }
+
+    if (!tamanhoSelecionado || tamanhoSelecionado === "") {
+      alert("Por favor, selecione um tamanho.");
+      return;
+    }
+
+    if (!quantidade || parseInt(quantidade) < 1) {
+      alert("Por favor, insira uma quantidade válida.");
+      return;
+    }
+
+    const item = {
+      id: produto.id,
+      name: produto.name,
+      image: imagemSelecionada,
+      price: produto.price,
+      cor: corNome,
+      tamanho: tamanhoSelecionado,
+      quantidade: parseInt(quantidade),
+    };
+
+    addToCart(item);
+    alert("Produto adicionado ao carrinho!");
+  };
+
+
+
   if (!produto) return <div>Carregando...</div>;
 
   return (
@@ -49,30 +93,57 @@ const ProductDetails = () => {
 
       <div className="max-w-6xl mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-6">
         {/* IMAGEM DO PRODUTO */}
-        <div className="flex flex-col md:flex-row gap-0 md:gap-10">
-          {/* Carrossel de Imagens (Swipeable) */}
+        <div className="flex flex-col md:flex-row gap-4">
+          {/* Miniaturas - visível apenas em modo desktop */}
+          <div className="hidden md:flex flex-col gap-2 max-w-[100px] overflow-y-auto max-h-[500px]">
+            {produto.images?.map((img, idx) => (
+              <img
+                key={idx}
+                src={img}
+                alt={`miniatura-${idx}`}
+                onClick={() => setImagemSelecionada(img)}
+                className={`w-full h-20 object-cover cursor-pointer border ${imagemSelecionada === img ? "border-black" : "border-gray-300"
+                  } rounded`}
+              />
+            ))}
+          </div>
+
+          {/* Imagem Principal (em desktop mostra imagem selecionada; no mobile usa o Swiper) */}
           <div className="w-full">
-            <Swiper
-              spaceBetween={10}
-              navigation
-              pagination={{ clickable: true }}
-              loop
-              modules={[Navigation, Pagination, A11y]} // Passando os módulos diretamente para a configuração
-              className="product-image-carousel"
-            >
-              {produto.images?.map((img, idx) => (
-                <SwiperSlide key={idx}>
-                  <img
-                    src={img}
-                    alt={`imagem-${idx}`}
-                    onClick={() => setImagemSelecionada(img)}
-                    className="w-full h-[500px] object-contain rounded-xl"
-                  />
-                </SwiperSlide>
-              ))}
-            </Swiper>
+            {/* Modo desktop - imagem selecionada */}
+            <div className="hidden md:block">
+              <img
+                src={imagemSelecionada}
+                alt="Imagem selecionada"
+                className="w-full h-[500px] object-contain rounded-xl"
+              />
+            </div>
+
+            {/* Modo mobile - Swiper */}
+            <div className="block md:hidden">
+              <Swiper
+                spaceBetween={10}
+                navigation
+                pagination={{ clickable: true }}
+                loop
+                modules={[Navigation, Pagination, A11y]}
+                className="product-image-carousel"
+              >
+                {produto.images?.map((img, idx) => (
+                  <SwiperSlide key={idx}>
+                    <img
+                      src={img}
+                      alt={`imagem-${idx}`}
+                      onClick={() => setImagemSelecionada(img)}
+                      className="w-full h-[400px] object-contain rounded-xl"
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
           </div>
         </div>
+
 
         {/* DETALHES DO PRODUTO */}
         <div className="space-y-4">
@@ -114,7 +185,15 @@ const ProductDetails = () => {
             <h4 className="font-semibold mt-4">Tamanho:</h4>
             <div className="flex gap-2 flex-wrap">
               {size?.map((size) => (
-                <button key={size.id} className="border rounded px-3 py-1">{size.name}</button>
+                //<button key={size.id} className="border rounded px-3 py-1">{size.name}</button>
+                <button
+                  key={size.id}
+                  onClick={() => setTamanhoSelecionado(size.name)}
+                  className={`border rounded px-3 py-1 ${tamanhoSelecionado === size.name ? "bg-orange-500 text-white" : "hover:bg-gray-100"
+                    }`}
+                >
+                  {size.name}
+                </button>
               ))}
             </div>
           </div>
@@ -131,7 +210,10 @@ const ProductDetails = () => {
           {/* BOTÕES */}
           <div className="flex items-center gap-4 mt-6">
             <input type="number" min="1" defaultValue="1" className="w-16 border px-2 py-1 rounded" />
-            <button className="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600">
+            <button
+              className="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600"
+              onClick={handleAddToCart}
+            >
               Adicionar ao Carrinho
             </button>
           </div>

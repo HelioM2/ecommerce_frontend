@@ -17,6 +17,9 @@ import Orders from './pages/Orders';
 import ProdutoDetalhe from './components/ProdutoDetalhe'; 
 import Footer from './components/Footer'; 
 import ProdutoEditar from './pages/ProdutoEditar'; 
+import Carrinho from "./pages/Carrinho"; 
+import { CartProvider } from "./components/CartContext";
+
  
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -25,10 +28,12 @@ function App() {
   return (
     <div className="flex flex-col min-h-screen">
       <BrowserRouter>
+      <CartProvider>
         <Header />
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/carrinho" element={<Carrinho />} />
             <Route path="/produtos" element={<Produtos />} />
             <Route path="/register" element={<Register />} />
             <Route path="/produtos/criar" element={<CriarProduto />} />
@@ -44,6 +49,7 @@ function App() {
           </Routes>
         </main>
         <Footer />
+        </CartProvider>
       </BrowserRouter>
     </div>
   );
