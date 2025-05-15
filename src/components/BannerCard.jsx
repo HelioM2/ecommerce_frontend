@@ -1,4 +1,4 @@
-import { ShoppingCart } from 'lucide-react';
+import { Plus, ShoppingCart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../hooks/useCart'; // certifica que o path está correto
 
@@ -51,10 +51,10 @@ const BannerCard = ({ product }) => {
 
       <button
         onClick={handleAddToCart}
-        className="text-black p-2 rounded-full hover:bg-[#59414F] border-2 border-black border-transparent hover:border-[#FED4EF] hover:text-white transition flex items-center justify-center"
+        className="text-black p-2 rounded-full hover:bg-green-400 border-2 border-black border-transparent hover:border-[#FED4EF] hover:text-white transition flex items-center justify-center"
         title="Adicionar ao carrinho"
       >
-        <ShoppingCart size={18} />
+        <Plus size={18} />
       </button>
     </div>
   </div>

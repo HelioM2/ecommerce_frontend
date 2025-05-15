@@ -66,7 +66,7 @@ const CriarProduto = () => {
             envio.append('images', file);
         });
 
-        const response = await axios.post('http://localhost:5000/api/product/create', envio, {
+        const response = await axios.post('https://ecommercebackend-backend-afropoderosa.up.railway.app/api/product/create', envio, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
