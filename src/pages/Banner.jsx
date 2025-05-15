@@ -12,7 +12,7 @@ const Produtos = () => {
   // Carregar os dados dos produtos
   useEffect(() => {
     // Fazendo a requisição ao backend
-    axios.get('https://ecommercebackend-backend-afropoderosa.up.railway.app/api/banner')  
+    axios.get('https://ecommercebackend-backend-afropoderosa.up.railway.app/api/product/banner')  
       .then(response => {
         setProdutos(response.data);  // Assumindo que os dados são retornados como um array de produtos
         setLoading(false);
@@ -24,7 +24,7 @@ const Produtos = () => {
   }, []);
 
   if (loading) {
-    return <div>Carregando produtos...</div>;
+    return <div>Carregando Banners...</div>;
   }
 
   if (error) {
