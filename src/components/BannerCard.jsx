@@ -2,7 +2,7 @@ import { ShoppingCart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../hooks/useCart'; // certifica que o path está correto
 
-const ProductCard = ({ product }) => {
+const BannerCard = ({ product }) => {
     const { addToCart } = useCart(); // ✅ Hook chamado no topo
 
     if (!product || typeof product !== 'object') return null;
@@ -14,7 +14,7 @@ const ProductCard = ({ product }) => {
 
     const handleAddToCart = () => {
         const item = {
-            id: product.id,
+            id: product.idimg_banner,
             name: product.name,
             image: imageUrl,
             price: product.price,
@@ -30,23 +30,24 @@ const ProductCard = ({ product }) => {
     return (
         <div className="relative group">
   <div className="bg-white rounded-xl border p-4 text-center hover:shadow-md transition-all no-underline">
-    <Link to={`/produto/${product.id}` } className ="no-underline">
+    <Link to={`/produto/${product.idimg_banner}` } className ="no-underline">
       <img
         src={imageUrl}
-        alt={product.name || 'Produto'}
+        alt={product.titulo || 'Produto'}
         className="w-full h-40 object-contain rounded-md bg-white mb-2 "
       />
 
       <p className="text-gray-800 font-semibold text-lg mb-4">
-        {product.name || 'Nome não disponível'}
+        {product.titulo || 'Nome não disponível'}
+      </p>
+
+      <p className="text-gray-800 font-semibold text-lg mb-4">
+        {product.slogam || 'Slogam não disponível'}
       </p>
     </Link>
 
     {/* Preço + botão na mesma linha */}
     <div className="flex items-center justify-between px-1 mt-2">
-      <span className="text-black font-bold text-base">
-        {product.price ? `${product.price}€` : 'Preço não disponível'}
-      </span>
 
       <button
         onClick={handleAddToCart}
@@ -62,4 +63,4 @@ const ProductCard = ({ product }) => {
     );
 };
 
-export default ProductCard;
+export default BannerCard;

@@ -14,6 +14,7 @@ const Produtos = () => {
     // Fazendo a requisição ao backend
     axios.get('https://ecommercebackend-backend-afropoderosa.up.railway.app/api/product/banner')  
       .then(response => {
+        console.log('Resposta do backend:', response.data);
         setProdutos(response.data);  // Assumindo que os dados são retornados como um array de produtos
         setLoading(false);
       })
