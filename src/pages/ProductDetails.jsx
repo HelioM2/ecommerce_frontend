@@ -84,7 +84,7 @@ const ProductDetails = () => {
   if (!produto) return <div>Carregando...</div>;
 
   return (
-    <div className=" px-6 pt-2 text-sm text-gray-600 max-w-[80%] mx-auto">
+    <div className="px-4 sm:px-6 pt-4 text-sm text-gray-600 max-w-screen-xl mx-auto">
       <nav className="flex items-center space-x-2 mt-20 md:space-x-4">
         <Link to="/" className="hover:underline text-blue-600">Início</Link>
         <span>/</span>
@@ -135,7 +135,7 @@ const ProductDetails = () => {
                       src={img}
                       alt={`imagem-${idx}`}
                       onClick={() => setImagemSelecionada(img)}
-                      className="w-full h-[400px] object-contain rounded-xl"
+                      className="w-full h-64 sm:h-80 md:h-[500px] object-contain rounded-xl"
                     />
                   </SwiperSlide>
                 ))}
@@ -162,8 +162,8 @@ const ProductDetails = () => {
           </div>
 
           {/* COR */}
-          <div>
-            <h4 className="font-semibold">Cor:</h4>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-6" >
+            <h4 className="font-semibold">Cor</h4>
             <select
               name="categoria"
               required
@@ -182,7 +182,7 @@ const ProductDetails = () => {
 
           {/* TAMANHO */}
           <div>
-            <h4 className="font-semibold mt-4">Tamanho:</h4>
+            <h4 className="font-semibold mt-4">Tamanho</h4>
             <div className="flex gap-2 flex-wrap">
               {size?.map((size) => (
                 //<button key={size.id} className="border rounded px-3 py-1">{size.name}</button>
@@ -198,18 +198,19 @@ const ProductDetails = () => {
             </div>
           </div>
 
-          {/* ENTREGA */}
-          <div>
-            <label className="block font-semibold mt-4">Entrega:</label>
+          {/* ENTREGA 
+          <div  className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-6">
+            <label className="block font-semibold mt-4">Entrega</label>
             <select className="border rounded px-4 py-2 w-full">
               <option>1 a 3 dias úteis</option>
               <option>3 a 5 dias úteis</option>
             </select>
-          </div>
+          </div>*/}
 
           {/* BOTÕES */}
+          <h4 className="font-semibold mt-4">Quantidade</h4>
           <div className="flex items-center gap-4 mt-6">
-            <input type="number" min="1" defaultValue="1" className="w-16 border px-2 py-1 rounded" />
+            <input type="number" min="1" defaultValue="1" className="w-full sm:w-16 border px-2 py-1 rounded" />
             <button
               className="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600"
               onClick={handleAddToCart}

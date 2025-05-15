@@ -40,18 +40,19 @@ const Home = () => {
                 <div className="flex-1 flex flex-col items-center justify-center text-center mb-6 md:mb-0">
                     <h1 className="text-2xl md:text-4xl font-bold text-white mb-2 mt-12 md:mt-0">T-shirt Afropoderosa</h1>
                     <p className="text-sm md:text-lg text-white mb-4">A tua loja favorita</p>
-                    <button className="bg-gray-800 text-white px-6 py-2 rounded-lg text-sm md:text-base font-bold">Contacte-nos</button>
+                    <button className="bg-gray-800 text-white px-6 py-2 rounded-lg text-sm md:text-base font-bold w-full max-w-[200px]">Contacte-nos</button>
                 </div>
                 <div className="flex-1 flex justify-center items-center">
                 <img
                     //src={`http://localhost:5000/uploads/${imagemAtual}`}
                     src={`https://ecommercebackend-backend-afropoderosa.up.railway.app/uploads/${imagemAtual}`}
                     alt="Banner produto"
-                    className="rounded-xl w-full h-auto max-h-64 md:max-h-80 object-contain transition-all duration-700 ease-in-out mt-4"
+                    loading="lazy"
+                    className="rounded-xl w-full h-auto max-h-64 md:max-h-80 object-contain transition-all duration-700 ease-in-out mt-4 max-w-xs md:max-w-full"
                 />
                 </div>
             </section>
-        <div className="space-y-10 px-4 md:px-12 py-8   max-w-[80%] mx-auto">
+        <div className="space-y-10 w-full max-w-screen-xl px-4 md:px-12 py-8 mx-auto">
 
             
 
@@ -75,19 +76,17 @@ const Home = () => {
             <section><br />
                 {/* <h2 className="text-2xl font-bold mb-6 text-center">T-shirt Destaques</h2> */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 ">
-                    {products?.map((product, index) => {
-                        if (!product || typeof product !== 'object') return null;
-                        // Extrair primeira imagem de destaque
-                        const imagens = product.imagens?.split(',') || [];
-                        const imagemDestaque = imagens[0] || '';
-                        // Criar novo objeto com imagemDestaque
-                        const productComDestaque = { ...product, imagemDestaque };
-                        return (
-                            <Link key={`${product.id}-${index}`} to={`/produto/${product.id}`}>
-                                <ProductCard product={productComDestaque} />
-                            </Link>
-                        );
-                    })}
+                     {products.map((product, index) => {
+                            if (!product || typeof product !== 'object') return null;
+
+                            const imagens = product.image?.split(',') || [];
+                            const imagemDestaque = imagens[0] || '';
+                            const productComDestaque = { ...product, imagemDestaque };
+
+                            return (
+                                <ProductCard key={`${product.id}-${index}`} product={productComDestaque} />
+                            );
+                        })}
                 </div>
             </section>
         </div>

@@ -25,7 +25,6 @@ const Carrinho = () => {
     };
 
     const finalizarCompra = () => {
-        // Aqui você pode redirecionar para login
         navigate("/login");
     };
 
@@ -41,13 +40,13 @@ const Carrinho = () => {
     }
 
     return (
-
-        <div className="mt-14 p-4 max-w-[80%] mx-auto">
-            <nav className="flex items-center space-x-2 md:space-x-4">
+        <div className="mt-14 p-4 max-w-6xl mx-auto w-full">
+            <nav className="flex flex-wrap items-center space-x-2 md:space-x-4">
                 <Link to="/" className="hover:underline text-blue-600">Início</Link>
                 <span>/</span>
                 <span className="text-gray-900 font-semibold">Carrinho de Compras</span>
             </nav><br />
+            
             <h2 className="text-2xl font-bold mb-6">Carrinho de Compras</h2>
 
             <div className="overflow-x-auto">
@@ -66,7 +65,7 @@ const Carrinho = () => {
                     <tbody>
                         {carrinho.map((item, index) => (
                             <tr key={index} className="border-t border-gray-300">
-                                <td className="p-2 flex items-center gap-2">
+                                <td className="p-2 flex flex-wrap items-center gap-2">
                                     <img src={item.image} alt={item.name} className="w-14 h-14 object-cover rounded" />
                                     <span>{item.name}</span>
                                 </td>
@@ -75,14 +74,13 @@ const Carrinho = () => {
                                 <td className="p-2">{item.quantidade}</td>
                                 <td className="p-2">{item.price}€</td>
                                 <td className="p-2">{(item.price * item.quantidade).toFixed(2)}€</td>
-                                <td className="p-2 space-x-2">
+                                <td className="p-2 space-y-2 md:space-y-0 md:space-x-2 flex flex-col md:flex-row">
                                     <button
                                         onClick={() => removerItem(index)}
                                         className="text-red-500 hover:underline"
                                     >
                                         Remover
                                     </button>
-
                                     <a
                                         href={`/produto/${item.id}`}
                                         className="text-blue-500 hover:underline"
@@ -92,7 +90,6 @@ const Carrinho = () => {
                                 </td>
                             </tr>
                         ))}
-
                     </tbody>
                 </table>
             </div>
@@ -101,7 +98,7 @@ const Carrinho = () => {
                 <h3 className="text-xl font-semibold">Total: {calcularTotal().toFixed(2)}€</h3>
                 <button
                     onClick={finalizarCompra}
-                    className="mt-4 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
+                    className="mt-4 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
                 >
                     Finalizar Compra
                 </button>

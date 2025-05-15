@@ -1,72 +1,65 @@
-// const ProductCard = ({ product }) => {
-//     if (!product || typeof product !== 'object') return null;
-
-//     // Verifica se a lista de imagens existe e se não está vazia
-//     const images = product.images ? JSON.parse(product.images) : [];
-    
-//     // Defina a URL da primeira imagem, ou uma imagem padrão se não houver imagens
-//     const imageUrl = images.length > 0
-//         ? `http://localhost:5000/uploads/${images[0]}`
-//         : '/images/default.jpg'; // Imagem padrão
-
-//     return (
-//         <div className="bg-white rounded-xl shadow p-4 text-center">
-//             {/* Imagem principal */}
-//             <img
-//                 src={imageUrl}
-//                 alt={product.name || 'Produto'}
-//                 className="w-full h-40 object-contain rounded-md bg-white"
-//             />
-            
-//             {/* Exibe miniaturas das outras imagens, se existirem */}
-//             {images.length > 1 && (
-//                 <div className="mt-2 flex justify-center space-x-2">
-//                     {images.slice(1).map((image, index) => (
-//                         <img
-//                             key={index}
-//                             src={`http://localhost:5000/uploads/${image}`}
-//                             alt={`Miniatura ${index + 1}`}
-//                             className="w-16 h-16 object-cover rounded-md border"
-//                         />
-//                     ))}
-//                 </div>
-//             )}
-            
-//             {/* Informações do produto */}
-//             <p className="text-black font-bold no-underline ">
-//                 {product.price ? `${product.price}€` : 'Preço não disponível'}
-//             </p>
-//         </div>
-//     );
-// };
-
-// export default ProductCard;
+import { ShoppingCart } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { useCart } from '../hooks/useCart'; // certifica que o path está correto
 
 const ProductCard = ({ product }) => {
+    const { addToCart } = useCart(); // ✅ Hook chamado no topo
+
     if (!product || typeof product !== 'object') return null;
 
-    // Extrair a primeira imagem da string separada por vírgulas
     const imageList = product.image ? product.image.split(',') : [];
     const imageUrl = imageList.length > 0
         ? `https://ecommercebackend-backend-afropoderosa.up.railway.app/uploads/${imageList[0]}`
-        : '/images/default.jpg'; 
+        : '/images/default.jpg';
+
+    const handleAddToCart = () => {
+        const item = {
+            id: product.id,
+            name: product.name,
+            image: imageUrl,
+            price: product.price,
+            quantidade: 1,
+            cor: product.cor || '',
+            tamanho: product.tamanho || '',
+        };
+
+        addToCart(item);
+        alert("Produto adicionado ao carrinho!");
+    };
+
     return (
-        <div className="bg-white rounded-xl shadow p-4 text-center">
-            <img
-                src={imageUrl}
-                alt={product.name || 'Produto'}
-                className="w-full h-40 object-contain rounded-md bg-white"
-            />
-            
-             <p className="text-black font-bold no-underline-custom">
-                {product.name ? `${product.name}` : 'Nome não disponível'}
-            </p>
-            <p className="text-black font-bold no-underline-custom">
-                {product.price ? `${product.price}€` : 'Preço não disponível'}
-            </p>
-        </div>
+        <div className="relative group">
+  <div className="bg-white rounded-xl border p-4 text-center hover:shadow-md transition-all no-underline">
+    <Link to={`/produto/${product.id}` } className ="no-underline">
+      <img
+        src={imageUrl}
+        alt={product.name || 'Produto'}
+        className="w-full h-40 object-contain rounded-md bg-white mb-2 "
+      />
+
+      <p className="text-gray-800 font-semibold text-lg mb-4">
+        {product.name || 'Nome não disponível'}
+      </p>
+    </Link>
+
+    {/* Preço + botão na mesma linha */}
+    <div className="flex items-center justify-between px-1 mt-2">
+      <span className="text-black font-bold text-base">
+        {product.price ? `${product.price}€` : 'Preço não disponível'}
+      </span>
+
+      <button
+        onClick={handleAddToCart}
+        className="text-white bg-black p-2 rounded-full hover:bg-gray-800 border-2 border-transparent hover:border-[#FED4EF] transition flex items-center justify-center"
+        title="Adicionar ao carrinho"
+      >
+        <ShoppingCart size={18} />
+      </button>
+    </div>
+  </div>
+</div>
+
     );
 };
-
 
 export default ProductCard;
