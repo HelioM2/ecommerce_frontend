@@ -8,11 +8,11 @@ const Header = () => {
   const { cartItems } = useCart();
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-gray-800 text-white p-2 z-50">
+    <header className="fixed top-0 left-0 w-full bg-black text-white p-2 z-50">
       <div className="max-w-[80%] mx-auto flex justify-between items-center mt-0">
         {/* Logo */}
         <div className="text-xl font-bold mr-0">
-          <a href="/" className="text-white no-underline hidden lg:flex justify-center items-center mt-0 space-x-6">
+          <a href="/" className="text-[#FED4EF] no-underline hidden lg:flex justify-center items-center mt-0 space-x-6">
             AfroPoderosa
           </a>
         </div>

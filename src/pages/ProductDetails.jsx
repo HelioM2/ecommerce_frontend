@@ -84,14 +84,14 @@ const ProductDetails = () => {
   if (!produto) return <div>Carregando...</div>;
 
   return (
-    <div className="max-w-6xl mx-auto px-6 pt-2 text-sm text-gray-600">
+    <div className=" px-6 pt-2 text-sm text-gray-600 max-w-[80%] mx-auto">
       <nav className="flex items-center space-x-2 mt-20 md:space-x-4">
         <Link to="/" className="hover:underline text-blue-600">Início</Link>
         <span>/</span>
         <span className="text-gray-900 font-semibold">{produto?.name}</span>
       </nav>
 
-      <div className="max-w-6xl mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-6">
+      <div className="max-w-6xl mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-6 ">
         {/* IMAGEM DO PRODUTO */}
         <div className="flex flex-col md:flex-row gap-4">
           {/* Miniaturas - visível apenas em modo desktop */}

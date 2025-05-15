@@ -36,7 +36,7 @@ const Home = () => {
     return (
         <>
         {/* Banner principal */}
-            <section className="w-full min-h-[300px] md:min-h-[400px] flex flex-col md:flex-row items-center justify-center bg-gradient-to-r from-purple-400 to-green-200 px-6 py-8 md:py-12">
+            <section className="w-full min-h-[300px] md:min-h-[400px] flex flex-col md:flex-row items-center justify-center bg-gradient-to-r from-[#59414F] to-[#FED4EF] px-6 py-8 md:py-12">
                 <div className="flex-1 flex flex-col items-center justify-center text-center mb-6 md:mb-0">
                     <h1 className="text-2xl md:text-4xl font-bold text-white mb-2 mt-12 md:mt-0">T-shirt Afropoderosa</h1>
                     <p className="text-sm md:text-lg text-white mb-4">A tua loja favorita</p>
@@ -51,7 +51,7 @@ const Home = () => {
                 />
                 </div>
             </section>
-        <div className="space-y-10 px-4 md:px-12 py-8 max-w-screen-xl mx-auto">
+        <div className="space-y-10 px-4 md:px-12 py-8   max-w-[80%] mx-auto">
 
             
 
@@ -73,7 +73,7 @@ const Home = () => {
 
             {/* Produtos em destaque */}
             <section><br />
-                <h2 className="text-2xl font-bold mb-6 text-center">T-shirt Destaques</h2>
+                {/* <h2 className="text-2xl font-bold mb-6 text-center">T-shirt Destaques</h2> */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 ">
                     {products?.map((product, index) => {
                         if (!product || typeof product !== 'object') return null;

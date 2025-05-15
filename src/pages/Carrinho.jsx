@@ -42,8 +42,8 @@ const Carrinho = () => {
 
     return (
 
-        <div className="max-w-5xl mx-auto mt-20 p-4">
-            <nav className="flex items-center space-x-2 mt-6 md:space-x-4">
+        <div className="mt-14 p-4 max-w-[80%] mx-auto">
+            <nav className="flex items-center space-x-2 md:space-x-4">
                 <Link to="/" className="hover:underline text-blue-600">Início</Link>
                 <span>/</span>
                 <span className="text-gray-900 font-semibold">Carrinho de Compras</span>
