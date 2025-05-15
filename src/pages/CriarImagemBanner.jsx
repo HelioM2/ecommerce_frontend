@@ -43,7 +43,7 @@ const CriarProduto = () => {
             envio.append('slogam', formData.slogam);
             envio.append('imagem', formData.imagem); // envia só uma imagem
 
-            const response = await axios.post('http://ecommercebackend-backend-afropoderosa.up.railway.app/api/product/create_banner', envio, {
+            const response = await axios.post('https://ecommercebackend-backend-afropoderosa.up.railway.app/api/product/create_banner', envio, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
