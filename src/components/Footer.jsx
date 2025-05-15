@@ -1,4 +1,5 @@
 import { FaInstagram, FaFacebookF, FaXTwitter, FaTiktok, FaYoutube, FaPinterest } from 'react-icons/fa6';
+import mbwayLogo from '../assets/mbwayy.jpeg';
 import React from 'react';
 
 const Footer = () => {
@@ -52,9 +53,9 @@ const Footer = () => {
               className="h-5 sm:h-6 md:h-7 lg:h-7"
             />
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg"
-              alt="PayPal"
-              className="h-5 sm:h-6 md:h-7 lg:h-7"
+              src={mbwayLogo}
+              alt="MB WAY"
+              className="h-10 sm:h-16 md:h-16 lg:h-16"
             />
           </div>
         </div>

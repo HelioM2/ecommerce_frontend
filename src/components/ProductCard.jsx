@@ -50,7 +50,7 @@ const ProductCard = ({ product }) => {
 
       <button
         onClick={handleAddToCart}
-        className="text-white bg-black p-2 rounded-full hover:bg-gray-800 border-2 border-transparent hover:border-[#FED4EF] transition flex items-center justify-center"
+        className="text-black p-2 rounded-full hover:bg-[#59414F] border-2 border-black border-transparent hover:border-[#FED4EF] hover:text-white transition flex items-center justify-center"
         title="Adicionar ao carrinho"
       >
         <ShoppingCart size={18} />

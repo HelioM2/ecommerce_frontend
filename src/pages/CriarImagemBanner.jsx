@@ -4,26 +4,12 @@ import Sidebar from '../components/Sidebar';
 
 const CriarProduto = () => {
 
-    const [categorias, setCategorias] = useState([]);
-    const [cores, setCores] = useState([]);
-
-    useEffect(() => {
-        axios.get('http://localhost:5000/api/product/categorias')
-            .then(res => setCategorias(res.data))
-            .catch(() => setCategorias([]));
-
-        axios.get('http://localhost:5000/api/product/cores')
-            .then(res => setCores(res.data))
-            .catch(() => setCores([]));
-    }, []);
+  
 
     const [formData, setFormData] = useState({
-        nome: '',
-        descricao: '',
-        preco: '',
-        categoria: '',
-        //imagem: null,
-        imagem: [],   
+        titulo: '',
+        slogam: '',
+        imagem: null,  // só uma imagem
     });
 
     const [mensagem, setMensagem] = useState('');
@@ -39,54 +25,44 @@ const CriarProduto = () => {
     const handleFileChange = (e) => {
         setFormData((prevData) => ({
             ...prevData,
-             //imagem: e.target.files[0],
-            imagem: Array.from(e.target.files), // converte FileList em array
-           
+            imagem: e.target.files[0],  // só o primeiro ficheiro
         }));
     };
 
     const handleSubmit = async (e) => {
-    e.preventDefault();
+        e.preventDefault();
 
-    // Validação no frontend
-    if (!formData.imagem || formData.imagem.length === 0) {
-        setMensagem('❌ Você precisa adicionar ao menos uma imagem!');
-        return;
-    }
+        if (!formData.imagem) {
+            setMensagem('❌ Você precisa adicionar uma imagem!');
+            return;
+        }
 
-    try {
-        const envio = new FormData();
-        envio.append('name', formData.nome);
-        envio.append('description', formData.descricao);
-        envio.append('price', formData.preco);
-        envio.append('categoria', formData.categoria);
+        try {
+            const envio = new FormData();
+            envio.append('titulo', formData.titulo);
+            envio.append('slogam', formData.slogam);
+            envio.append('imagem', formData.imagem); // envia só uma imagem
 
-        // Envia as imagens com o nome de campo 'images'
-        formData.imagem.forEach((file) => {
-            envio.append('images', file);
-        });
+            const response = await axios.post('http://ecommercebackend-backend-afropoderosa.up.railway.app/api/product/create_banner', envio, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
 
-        const response = await axios.post('http://localhost:5000/api/product/create', envio, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-        });
+            setMensagem(response.data.message || 'Banner criado com sucesso!');
+            setFormData({
+                titulo: '',
+                slogam: '',
+                imagem: null,
+            });
 
-        setMensagem(response.data.message || 'Produto criado com sucesso!');
-        setFormData({
-            nome: '',
-            descricao: '',
-            preco: '',
-            categoria: '',
-            imagem: [],
-        });
-    } catch (error) {
-        console.error('Erro ao criar produto:', error);
-        setMensagem('❌ Erro ao criar produto');
-    }
-};
-
-
+            // Limpar input file manualmente
+            document.querySelector('input[type="file"]').value = '';
+        } catch (error) {
+            console.error('Erro ao criar banner:', error);
+            setMensagem('❌ Erro ao criar banner');
+        }
+    };
 
     return (
         <div className="flex min-h-screen mt-10">
@@ -99,7 +75,7 @@ const CriarProduto = () => {
                         <input
                             type="text"
                             name="titulo"
-                            placeholder="Titulo do Banner"
+                            placeholder="Título do Banner"
                             value={formData.titulo}
                             onChange={handleChange}
                             required
@@ -107,20 +83,20 @@ const CriarProduto = () => {
                         />
 
                         <input
+                            type="text"
                             name="slogam"
-                            placeholder="slogma"
+                            placeholder="Slogam"
                             value={formData.slogam}
                             onChange={handleChange}
                             required
                             className="w-full p-2 border border-gray-300 rounded"
-                        ></input>
- 
+                        />
+
                         <input
                             type="file"
-                            name="images"
+                            name="imagem"
                             accept="image/*"
                             onChange={handleFileChange}
-                            multiple // <- esta é a chave para múltiplos ficheiros
                             required
                             className="w-full"
                         />

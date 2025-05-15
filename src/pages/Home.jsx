@@ -40,7 +40,7 @@ const Home = () => {
                 <div className="flex-1 flex flex-col items-center justify-center text-center mb-6 md:mb-0">
                     <h1 className="text-2xl md:text-4xl font-bold text-white mb-2 mt-12 md:mt-0">T-shirt Afropoderosa</h1>
                     <p className="text-sm md:text-lg text-white mb-4">A tua loja favorita</p>
-                    <button className="bg-gray-800 text-white px-6 py-2 rounded-lg text-sm md:text-base font-bold w-full max-w-[200px]">Contacte-nos</button>
+                    <button className="bg-black text-white px-6 py-2 rounded-lg text-sm md:text-base font-bold w-full max-w-[200px]">Contacte-nos</button>
                 </div>
                 <div className="flex-1 flex justify-center items-center">
                 <img
