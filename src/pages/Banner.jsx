@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ErrorBoundary from '../components/ErrorBoundary'; 
-import ProductCard from '../components/ProductCard';
+import BannerCard from '../components/BannerCard';
 import Sidebar from '../components/Sidebar';
 
 const Produtos = () => {
@@ -12,13 +12,13 @@ const Produtos = () => {
   // Carregar os dados dos produtos
   useEffect(() => {
     // Fazendo a requisição ao backend
-    axios.get('https://ecommercebackend-backend-afropoderosa.up.railway.app/api/product')  
+    axios.get('https://ecommercebackend-backend-afropoderosa.up.railway.app/api/banner')  
       .then(response => {
         setProdutos(response.data);  // Assumindo que os dados são retornados como um array de produtos
         setLoading(false);
       })
       .catch(error => {
-        setError('Erro ao carregar os produtos');
+        setError('Erro ao carregar os Banners');
         setLoading(false);
       });
   }, []);
@@ -39,7 +39,7 @@ const Produtos = () => {
         <ErrorBoundary>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 ">
         {produtos.map((produto) => (
-              <ProductCard key={produto.id} product={produto} />
+              <BannerCard key={produto.id} product={produto} />
             ))}
         </div>
         </ErrorBoundary>

@@ -66,6 +66,9 @@ const Sidebar = () => {
           <Link to="/produtos/criar_banner" className="block text-white no-underline hover:bg-[#B0789E] px-4 py-2 rounded">
             Criar Banner
           </Link>
+          <Link to="/produtos/definir_banner" className="block text-white no-underline hover:bg-[#B0789E] px-4 py-2 rounded">
+            Definir Banner
+          </Link>
           <Link to="/produtos/criar" className="block text-white no-underline hover:bg-[#B0789E] px-4 py-2 rounded">
             Criar Produto
           </Link>

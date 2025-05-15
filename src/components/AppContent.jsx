@@ -8,6 +8,7 @@ import Produtos from '../pages/Produtos';
 import Register from '../pages/Register';
 import CriarProduto from '../pages/CriarProduto';
 import CriarImagemBanner from '../pages/CriarImagemBanner';
+import Banner from '../pages/Banner';
 import Criar_Detalhe_Produto from '../pages/Criar_Detalhe_Produto';
 import Criar_Cor from '../pages/Criar_Cor';
 import Criar_Tamanho from '../pages/Criar_Tamanho';
@@ -38,7 +39,8 @@ function AppContent() {
           <Route path="/produtos" element={<Produtos />} />
           <Route path="/register" element={<Register />} />
           <Route path="/produtos/criar" element={<CriarProduto />} />
-           <Route path="/produtos/criar_banner" element={<CriarImagemBanner />} />
+          <Route path="/produtos/criar_banner" element={<CriarImagemBanner />} />
+          <Route path="/produtos/definir_banner" element={<Banner />} />
           <Route path="/produtos/color" element={<Criar_Cor />} />
           <Route path="/produtos/size" element={<Criar_Tamanho />} />
           <Route path="/produtos/detalhes" element={<Criar_Detalhe_Produto />} />
