@@ -9,7 +9,7 @@ const ProductCard = ({ product }) => {
 
     const imageList = product.image ? product.image.split(',') : [];
     const imageUrl = imageList.length > 0
-        ? `https://ecommercebackend-backend-afropoderosa.up.railway.app/uploads/${imageList[0]}`
+        ? `http://localhost:5000/uploads/${imageList[0]}`
         : '/images/default.jpg';
 
     const handleAddToCart = () => {

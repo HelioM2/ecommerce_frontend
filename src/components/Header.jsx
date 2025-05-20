@@ -21,7 +21,7 @@ const Header = () => {
         <div className="flex items-center space-x-4 lg:hidden">
           {/* Carrinho - mobile */}
           <div className="relative">
-            <Link to="/carrinho">
+            <Link to="/carrinho" >
               <ShoppingCart size={24} className="text-white" />
               {cartItems.length > 0 && (
                 <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
@@ -42,11 +42,11 @@ const Header = () => {
         <nav className="hidden lg:flex justify-center items-center mt-2 space-x-6">
           <ul className="flex space-x-6">
             <li><a href="/" className="hover:text-gray-400 no-underline text-white">Home</a></li>
-            <li><a href="/produtos" className="hover:text-gray-400 no-underline text-white">Produtos</a></li>
+            <li><a href="/dashboard" className="hover:text-gray-400 no-underline text-white">Produtos</a></li>
             <li><a href="/sobre" className="hover:text-gray-400 no-underline text-white">Sobre</a></li>
             <li><a href="/contato" className="hover:text-gray-400 no-underline text-white">Contato</a></li>
             <li className="relative">
-            <Link to="/carrinho" className="flex items-center space-x-2">
+            <Link to="/carrinho" className="flex items-center space-x-2 no-underline">
               <ShoppingCart size={24} className="text-white" />
               {cartItems.length > 0 && (
                 <span className="ml-1 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">

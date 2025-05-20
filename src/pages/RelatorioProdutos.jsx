@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import Sidebar from '../components/Sidebar';
 
 const RelatorioProdutos = () => {
     const [produtos, setProdutos] = useState([]);
@@ -56,7 +55,6 @@ const RelatorioProdutos = () => {
 
     return (
         <div className="flex min-h-screen">
-            <Sidebar />
             <main className="flex-1 p-8 bg-white grid grid-cols-3 gap-6 max-w-6xl mx-auto">
                 {/* Tabela de produtos (ocupa as 3 colunas) */}
                 <div className="col-span-3">

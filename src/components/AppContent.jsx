@@ -1,9 +1,8 @@
 import React from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Header from '../components/Header';
-import HeaderDashboard from '../pages/HeaderDashboard';
 import Footer from '../components/Footer';
-
+import DashboardLayout from '../components/DashboardLayout';
 import Produtos from '../pages/Produtos';
 import Register from '../pages/Register';
 import CriarProduto from '../pages/CriarProduto';
@@ -31,28 +30,38 @@ function AppContent() {
 
   return (
     <>
-      {isDashboard ? <HeaderDashboard /> : <Header />}
+      {/* Header só nas rotas públicas */}
+      {!isDashboard && <Header />}
+
       <main className="flex-grow">
         <Routes>
+          {/* Rotas públicas */}
           <Route path="/" element={<Home />} />
           <Route path="/carrinho" element={<Carrinho />} />
-          <Route path="/produtos" element={<Produtos />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/produtos/criar" element={<CriarProduto />} />
-          <Route path="/produtos/criar_banner" element={<CriarImagemBanner />} />
-          <Route path="/produtos/definir_banner" element={<Banner />} />
-          <Route path="/produtos/color" element={<Criar_Cor />} />
-          <Route path="/produtos/size" element={<Criar_Tamanho />} />
-          <Route path="/produtos/detalhes" element={<Criar_Detalhe_Produto />} />
-          <Route path="/produto/caregoria" element={<CriarCategoriaCor />} />
-          <Route path="/produto/relatorio" element={<RelatorioProdutos />} />
-          <Route path="/orders" element={<Orders />} />
-          <Route path="/produto/ver/:id" element={<ProdutoDetalhe />} />
-          <Route path="/produto/editar/:id" element={<ProdutoEditar />} />
           <Route path="/produto/:id" element={<ProductDetails />} />
+
+          {/* Rotas com layout de dashboard */}
+          <Route element={<DashboardLayout />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/produtos" element={<Produtos />} />
+            <Route path="/produtos/criar" element={<CriarProduto />} />
+            <Route path="/produtos/criar_banner" element={<CriarImagemBanner />} />
+            <Route path="/produtos/definir_banner" element={<Banner />} />
+            <Route path="/produtos/color" element={<Criar_Cor />} />
+            <Route path="/produtos/size" element={<Criar_Tamanho />} />
+            <Route path="/produtos/detalhes" element={<Criar_Detalhe_Produto />} />
+            <Route path="/produto/caregoria" element={<CriarCategoriaCor />} />
+            <Route path="/produto/relatorio" element={<RelatorioProdutos />} />
+            <Route path="/produto/ver/:id" element={<ProdutoDetalhe />} />
+            <Route path="/produto/editar/:id" element={<ProdutoEditar />} />
+            <Route path="/orders" element={<Orders />} />
+          </Route>
         </Routes>
       </main>
-      <Footer />
+
+      {/* Footer só nas rotas públicas */}
+      {!isDashboard && <Footer />}
     </>
   );
 }

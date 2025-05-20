@@ -32,10 +32,10 @@ const Footer = () => {
           <div className="flex gap-3 text-base sm:text-lg md:text-xl lg:text-xl">
             <FaInstagram />
             <FaFacebookF />
-            <FaXTwitter />
+            {/* <FaXTwitter /> */}
             <FaTiktok />
-            <FaYoutube />
-            <FaPinterest />
+            {/* <FaYoutube />
+            <FaPinterest /> */}
           </div>
         </div>
 

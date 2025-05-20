@@ -43,7 +43,7 @@ const CriarProduto = () => {
             envio.append('slogam', formData.slogam);
             envio.append('imagem', formData.imagem); // envia só uma imagem
 
-            const response = await axios.post('https://ecommercebackend-backend-afropoderosa.up.railway.app/api/product/create_banner', envio, {
+            const response = await axios.post('http://localhost:5000/api/product/create_banner', envio, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -66,9 +66,8 @@ const CriarProduto = () => {
 
     return (
         <div className="flex min-h-screen mt-10">
-            <Sidebar />
-            <main className="flex-1 p-8 bg-gray-100">
-                <div className="max-w-3xl mx-auto mt-10 bg-white p-6 rounded shadow">
+            <main className="flex-1 p-8">
+                <div className="max-w-xl mx-auto mt-10 bg-white p-6 rounded shadow">
                     <h2 className="text-2xl font-bold mb-6">Criar Banner</h2>
                     {mensagem && <div className="mb-4 text-green-600">{mensagem}</div>}
                     <form onSubmit={handleSubmit} className="space-y-4">

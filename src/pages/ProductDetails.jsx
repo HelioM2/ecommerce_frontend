@@ -16,26 +16,27 @@ const ProductDetails = () => {
   const [imagemSelecionada, setImagemSelecionada] = useState(null);
   const [tamanhoSelecionado, setTamanhoSelecionado] = useState("");
 
+  //https://ecommercebackend-backend-afropoderosa.up.railway.app
 
   useEffect(() => {
-    axios.get(`https://ecommercebackend-backend-afropoderosa.up.railway.app/api/product/coresDetails/${id}`)
+    axios.get(`http://localhost:5000/api/product/coresDetails/${id}`)
       .then(res => setCores(res.data))
       .catch(() => setCores([]));
 
-    axios.get(`https://ecommercebackend-backend-afropoderosa.up.railway.app/api/product/productSize/${id}`)
+    axios.get(`http://localhost:5000/api/product/productSize/${id}`)
       .then(res => setSize(res.data))
       .catch(() => setSize([]));
 
-    axios.get(`https://ecommercebackend-backend-afropoderosa.up.railway.app/api/product/${id}`).then((res) => {
+    axios.get(`http://localhost:5000/api/product/${id}`).then((res) => {
       let produtoData = res.data;
       if (produtoData.image && typeof produtoData.image === 'string') {
-        const imagensArray = produtoData.image.split(',').map(img => `https://ecommercebackend-backend-afropoderosa.up.railway.app/uploads/${img.trim()}`);
+        const imagensArray = produtoData.image.split(',').map(img => `http://localhost:5000/uploads/${img.trim()}`);
         produtoData.images = imagensArray;
       }
       setProduto(produtoData);
       const imageUrl = produtoData.images && produtoData.images.length > 0
         ? produtoData.images[0]
-        : (produtoData.image ? `https://ecommercebackend-backend-afropoderosa.up.railway.app/uploads/${produtoData.image}` : '/images/default.webp');
+        : (produtoData.image ? `http://localhost:5000/uploads/${produtoData.image}` : '/images/default.webp');
       setImagemSelecionada(imageUrl);
     });
   }, [id]);

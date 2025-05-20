@@ -6,10 +6,12 @@ import { Link } from 'react-router-dom';
 
 const Home = () => {
     const [products, setProducts] = useState([]);
-    const [indiceAtual, setIndiceAtual] = useState(0);
+    const [banner, setBanner] = useState([]);
+    //const [indiceAtual, setIndiceAtual] = useState(0);
 
     useEffect(() => {
-        api.get('https://ecommercebackend-backend-afropoderosa.up.railway.app/api/product')
+
+        api.get('http://localhost:5000/api/product')
             .then(response => {
                 console.log('Produtos recebidos:', response.data);
                 // Filtra apenas produtos válidos com ou sem imagem
@@ -17,35 +19,39 @@ const Home = () => {
                 setProducts(validProducts);
             })
             .catch(error => console.error('Erro ao buscar produtos:', error));
+
+
+        api.get('http://localhost:5000/api/product/getbanner')
+            .then(response => {
+                console.log('Banner recebidos:', response.data);
+                // Filtra apenas produtos válidos com ou sem imagem
+                const validProducts = response.data.filter(p => p && typeof p === 'object');
+                setBanner(validProducts);
+            })
+            .catch(error => console.error('Erro ao buscar Banner:', error));
     }, []);
 
-    const imagensBanner = products
-        .map(produto => produto.image?.split(',')[0])
+    const imagensBanner = banner
+        .map(produto => produto.imagem)
         .filter(img => !!img) //remove undefined vazias
 
-    useEffect(() => {
-        const intervalo = setInterval(() => {
-            setIndiceAtual((prev) => (prev + 1) % imagensBanner.length);
-        }, 5000);
-
-        return () => clearInterval(intervalo);
-    }, [imagensBanner.length]);
-
-    const imagemAtual = imagensBanner[indiceAtual] || '';
+    const imagemAtual = imagensBanner[0] || '';
+    const tituloAtual = banner[0]?.titulo || '';
+    const slogamAtual = banner[0]?.slogam || '';
 
     return (
         <>
         {/* Banner principal */}
             <section className="w-full min-h-[300px] md:min-h-[400px] flex flex-col md:flex-row items-center justify-center bg-gradient-to-r from-[#59414F] to-[#FED4EF] px-6 py-8 md:py-12">
                 <div className="flex-1 flex flex-col items-center justify-center text-center mb-6 md:mb-0">
-                    <h1 className="text-2xl md:text-4xl font-bold text-white mb-2 mt-12 md:mt-0">T-shirt Afropoderosa</h1>
-                    <p className="text-sm md:text-lg text-white mb-4">A tua loja favorita</p>
+                    <h1 className="text-2xl md:text-4xl font-bold text-white mb-2 mt-12 md:mt-0 ">{tituloAtual}</h1>
+                    <p className="text-sm md:text-lg text-white mb-4">{slogamAtual}</p>
                     <button className="bg-black text-white px-6 py-2 rounded-lg text-sm md:text-base font-bold w-full max-w-[200px]">Contacte-nos</button>
                 </div>
                 <div className="flex-1 flex justify-center items-center">
                 <img
                     //src={`http://localhost:5000/uploads/${imagemAtual}`}
-                    src={`https://ecommercebackend-backend-afropoderosa.up.railway.app/uploads/${imagemAtual}`}
+                    src={`http://localhost:5000/uploads/${imagemAtual}`}
                     alt="Banner produto"
                     loading="lazy"
                     className="rounded-xl w-full h-auto max-h-64 md:max-h-80 object-contain transition-all duration-700 ease-in-out mt-4 max-w-xs md:max-w-full"

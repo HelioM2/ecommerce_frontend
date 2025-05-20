@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Sidebar from '../components/Sidebar';
 
 const CriarProduto = () => {
  
@@ -40,7 +39,6 @@ const CriarProduto = () => {
 
     return (
         <div className="flex min-h-screen">
-            <Sidebar />
             <main className="flex-1 p-8 bg-gray-100">
                 <div className="max-w-3xl mx-auto mt-10 bg-white p-6 rounded shadow">
                     <h2 className="text-2xl font-bold mb-6">Criar Cor do Produto</h2>

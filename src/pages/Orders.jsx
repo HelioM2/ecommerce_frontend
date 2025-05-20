@@ -38,7 +38,7 @@ const Orders = () => {
 
   return (
     <div className="flex min-h-screen">
-      <Sidebar />
+
       <main className="flex-1 p-8 bg-white">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-3xl font-bold mb-6 text-center">Pedidos</h1>

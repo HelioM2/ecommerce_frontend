@@ -4,7 +4,7 @@ import ErrorBoundary from '../components/ErrorBoundary';
 import BannerCard from '../components/BannerCard';
 import Sidebar from '../components/Sidebar';
 
-const Produtos = () => {
+const Banner = () => {
   const [produtos, setProdutos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -12,9 +12,9 @@ const Produtos = () => {
   // Carregar os dados dos produtos
   useEffect(() => {
     // Fazendo a requisição ao backend
-    axios.get('https://ecommercebackend-backend-afropoderosa.up.railway.app/api/product/banner')  
+    axios.get('http://localhost:5000/api/product/banners')  
       .then(response => {
-        console.log('Resposta do backend:', response.data);
+       // console.log('Resposta do backend:', response.data);
         setProdutos(response.data);  // Assumindo que os dados são retornados como um array de produtos
         setLoading(false);
       })
@@ -33,8 +33,7 @@ const Produtos = () => {
   }
 
   return (
-    <div className="flex min-h-screen mt-14">
-      <Sidebar />
+    <div className="flex min-h-screen mt-0">
       <main className="flex-1 p-8 bg-gray-100">
         {/* <h1 className="text-3xl font-bold mb-6 text-center"></h1> */}
         <ErrorBoundary>
@@ -49,4 +48,4 @@ const Produtos = () => {
   );
 };
 
-export default Produtos;
+export default Banner;

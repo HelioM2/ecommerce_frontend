@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Sidebar from '../components/Sidebar';
 
 const CriarProduto = () => {
 
@@ -66,7 +65,7 @@ const CriarProduto = () => {
             envio.append('images', file);
         });
 
-        const response = await axios.post('https://ecommercebackend-backend-afropoderosa.up.railway.app/api/product/create', envio, {
+        const response = await axios.post('http://localhost:5000/api/product/create', envio, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
@@ -90,7 +89,6 @@ const CriarProduto = () => {
 
     return (
         <div className="flex min-h-screen mt-10">
-            <Sidebar />
             <main className="flex-1 p-8 bg-gray-100">
                 <div className="max-w-3xl mx-auto mt-10 bg-white p-6 rounded shadow">
                     <h2 className="text-2xl font-bold mb-6">Criar Novo Produto</h2>
