@@ -11,9 +11,8 @@ const Sidebar = ({ menuAberto, toggleMenu }) => {
     <>
       {/* Sidebar */}
       <aside
-        className={`bg-gray-900 text-white w-64 p-6 h-screen fixed md:static top-0 left-0 z-50 transform transition-transform duration-300 overflow-y-auto ${
-          menuAberto ? 'translate-x-0' : '-translate-x-full'
-        } md:translate-x-0`}
+        className={`bg-gray-900 text-white w-64 p-6 h-screen min-h-screen fixed md:static top-0 left-0 z-50 transform transition-transform duration-300 overflow-y-auto ${menuAberto ? 'translate-x-0' : '-translate-x-full'
+          } md:translate-x-0`}
       >
         <div className="md:flex items-center gap-3 mb-6 hidden">
           <img src={logo} alt="Logo" className="h-16 w-16 object-contain" />
@@ -23,7 +22,7 @@ const Sidebar = ({ menuAberto, toggleMenu }) => {
         <nav className="space-y-4">
           <Link to="/" className="block hover:bg-[#B0789E] px-4 py-2 rounded">Utilizadores</Link>
 
-          {/* Artigos */}
+          {/* Artigos
           <div>
             <button
               onClick={() => setArtigosAberto(!artigosAberto)}
@@ -40,7 +39,7 @@ const Sidebar = ({ menuAberto, toggleMenu }) => {
                 <Link to="/artigos/categorias" className="block hover:bg-[#B0789E] px-4 py-2 rounded">Criar Categoria</Link>
               </div>
             )}
-          </div>
+          </div> */}
 
           {/* Produtos */}
           <div>
@@ -60,21 +59,21 @@ const Sidebar = ({ menuAberto, toggleMenu }) => {
                 <Link to="/produtos/color" className="block hover:bg-[#B0789E] px-4 py-2 rounded">Criar Cor</Link>
                 <Link to="/produtos/size" className="block hover:bg-[#B0789E] px-4 py-2 rounded">Criar Tamanho</Link>
                 <Link to="/produtos/detalhes" className="block hover:bg-[#B0789E] px-4 py-2 rounded">Definir Produto</Link>
-                <Link to="/produto/relatorio" className="block hover:bg-[#B0789E] px-4 py-2 rounded">Relatório de Produtos</Link>
-                <Link to="/produto/caregoria" className="block hover:bg-[#B0789E] px-4 py-2 rounded">Criar Categoria</Link>
-                <Link to="/produto/relatorio" className="block hover:bg-[#B0789E] px-4 py-2 rounded">Gráficos</Link>
+                {/* <Link to="/produto/relatorio" className="block hover:bg-[#B0789E] px-4 py-2 rounded">Relatório de Produtos</Link>
+                <Link to="/produto/caregoria" className="block hover:bg-[#B0789E] px-4 py-2 rounded">Criar Categoria</Link> */}
+                {/* <Link to="/produto/relatorio" className="block hover:bg-[#B0789E] px-4 py-2 rounded">Gráficos</Link> */}
               </div>
             )}
           </div>
 
-          <Link to="/orders" className="block hover:bg-[#B0789E] px-4 py-2 rounded">Pedidos</Link>
-          <Link to="/relatorios" className="block hover:bg-[#B0789E] px-4 py-2 rounded">Relatórios</Link>
+          <Link to="/orders" className="block hover:bg-[#B0789E] px-4 py-2 rounded">Relatorio Geral</Link>
+          {/* <Link to="/relatorios" className="block hover:bg-[#B0789E] px-4 py-2 rounded">Relatórios</Link> */}
         </nav>
       </aside>
 
       {/* Overlay para mobile */}
 
-       {menuAberto && (
+      {menuAberto && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
           onClick={toggleMenu}

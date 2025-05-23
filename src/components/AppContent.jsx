@@ -17,9 +17,10 @@ import Dashboard from '../pages/Dashboard';
 import RelatorioProdutos from '../pages/RelatorioProdutos';
 import CriarCategoriaCor from '../pages/CriarCategoriaCor';
 import ProdutoDetalhe from '../components/ProdutoDetalhe';
-import ProdutoEditar from '../pages/ProdutoEditar';
+import ProdutoEditar from '../pages/EditProduto';
 import Carrinho from '../pages/Carrinho';
 import Orders from '../pages/Orders';
+import ProdutoDetalhesBack from '../pages/produtoDetalhesBack';
 
 function AppContent() {
   const location = useLocation();
@@ -43,6 +44,7 @@ function AppContent() {
 
           {/* Rotas com layout de dashboard */}
           <Route element={<DashboardLayout />}>
+            <Route path="/produtos/editprodutos/:id" element= {< ProdutoDetalhesBack />} /> 
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/produtos" element={<Produtos />} />
             <Route path="/produtos/criar" element={<CriarProduto />} />
@@ -54,7 +56,7 @@ function AppContent() {
             <Route path="/produto/caregoria" element={<CriarCategoriaCor />} />
             <Route path="/produto/relatorio" element={<RelatorioProdutos />} />
             <Route path="/produto/ver/:id" element={<ProdutoDetalhe />} />
-            <Route path="/produto/editar/:id" element={<ProdutoEditar />} />
+            <Route path="/produtos/editar/:id" element={<ProdutoEditar />} />
             <Route path="/orders" element={<Orders />} />
           </Route>
         </Routes>
